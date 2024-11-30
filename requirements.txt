@@ -1,0 +1,4 @@
+# requirements.txt
+solana==0.28.0
+base58
+colorama
