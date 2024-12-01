@@ -1,5 +1,3 @@
-# main.py
-
 import sys
 import os
 import time  # Import time module untuk menggunakan sleep
@@ -14,7 +12,6 @@ sys.path.append(os.path.join(os.getcwd(), 'config'))
 
 # Mengimpor modul-modul dari folder solana_modules
 from wallet_generator import generate_keypair
-from file_handler import save_wallet_to_file
 from format_converter import convert_private_key_to_base58, convert_public_key_to_base58
 
 def get_positive_integer_input(prompt, default_value=1):
@@ -49,8 +46,8 @@ def main():
         with open("walletjadi.txt", "w") as f:  # Membuka file walletjadi.txt untuk menulis
             f.write("===== Daftar Wallet Solana =====\n\n")  # Menulis header tanpa warna
             for i in range(wallet_count):
-                # Menghasilkan keypair Solana
-                public_key, private_key = generate_keypair()
+                # Menghasilkan keypair Solana dan menerima tiga nilai
+                public_key, private_key, mnemonic = generate_keypair()
 
                 # Konversi private key ke base58
                 private_key_base58 = convert_private_key_to_base58(private_key)
@@ -59,6 +56,7 @@ def main():
                 f.write(f"Wallet {i + 1}:\n")
                 f.write(f"Public Key: {public_key}\n")
                 f.write(f"Private Key (Base58): {private_key_base58}\n")
+                f.write(f"Mnemonic: {mnemonic}\n")  # Menambahkan mnemonic ke dalam file
                 f.write("\n")  # Baris kosong antara wallet
 
                 # Menampilkan informasi di terminal dengan warna
